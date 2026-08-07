@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,6 +11,8 @@ public class PlayerController : MonoBehaviour
     public InputActionAsset inputActions;
     public Camera mainCam;
     public LineRenderer lr;
+    public HingeJoint2D hingeJoint;
+    public DistanceJoint2D distanceJoint;
 
     private InputAction moveAction;
     private InputAction attackAction;
@@ -63,7 +66,13 @@ public class PlayerController : MonoBehaviour
             lr.SetPosition(0, playerRigidbody.position);
             lr.SetPosition(1, mainCam.ScreenToWorldPoint(Mouse.current.position.ReadValue()));
 
-            
+            //hingeJoint.connectedAnchor = playerRigidbody.position;
+            //hingeJoint.connectedAnchor = mainCam.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+            //hingeJoint.anchor = mainCam.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+
+            distanceJoint.connectedAnchor = mainCam.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+            distanceJoint.anchor = new Vector2(0,0);
+
         }
     }
 
